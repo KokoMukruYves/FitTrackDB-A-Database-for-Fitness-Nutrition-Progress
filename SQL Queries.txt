@@ -1,0 +1,638 @@
+I.	System implementation using SQL Server Management Studio
+•	Database creation
+CREATE DATABASE FitTrackDB
+      III.1.  Tables creation
+1.	Create user address table
+CREATE TABLE UserAddress(
+	User_Address_ID INT PRIMARY KEY NOT NULL,
+	User_Street VARCHAR(25),
+	User_City VARCHAR(25)
+);
+
+
+2.	Create users table
+
+CREATE TABLE Users(
+	UserID INT PRIMARY KEY NOT NULL,
+	User_Address_ID INT NOT NULL,
+	UserFName VARCHAR(10),
+	UserSName VARCHAR(10),
+	UserStatus VARCHAR(50),
+	UserGender VARCHAR(1),
+	UserAge INT, 
+	UserWeight DECIMAL(5,2),
+	UserHeight DECIMAL(5,2), 
+	UserMedicalStatus VARCHAR(30),
+	UserPhoneNumber VARCHAR(15),
+	UserEmail VARCHAR(30),
+	EmergencyNumber VARCHAR(15), 
+	FOREIGN KEY(User_Address_ID) REFERENCES UserAddress(User_Address_ID)
+);
+
+3.	 Create Goals table
+
+CREATE TABLE Goals (
+	GoalID INT PRIMARY KEY NOT NULL,
+	UserID INT NOT NULL,
+	GoalDescription VARCHAR (50),
+	GoalStartDate DATE,
+	GoalExpireDate DATE, 
+	GoalComplexityLevel VARCHAR(10),
+	GoalTargetValue DECIMAL(10, 2),
+	FOREIGN KEY(UserID) REFERENCES Users(UserID)
+);
+4.	 Create Exercise table
+CREATE TABLE Exercise (
+	ExerciseID INT PRIMARY KEY NOT NULL,
+	ExerciseType VARCHAR (50),
+	CaloriesBurned DECIMAL(10,2),
+	Muscles_Used VARCHAR(50), 
+	Exercise_Date DATE,
+	Exercise_Start_Time TIME,
+	Exercise_End_Time TIME,
+);
+
+5.	Create Nutrition table
+CREATE TABLE Nutrition (
+	Nutrition_ID INT PRIMARY KEY NOT NULL,
+	UserID INT NOT NULL,
+	Regime_Type VARCHAR(30),
+	Number_Lunch INT,
+	Caloriesconsumed_ DECIMAL(10,2),
+	ProteinsConsumed DECIMAL(8,2),
+	Consumption_Date DATE, 
+	FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+6.	Create Progress table
+
+	
+CREATE TABLE Progress (
+	ProgressID INT PRIMARY KEY NOT NULL,
+	UserID INT NOT NULL,
+	GoalID INT NOT NULL,
+	Weight_lost VARCHAR(10),
+	Week_frequency INT,
+	FOREIGN KEY(UserID) REFERENCES Users(UserID),
+	FOREIGN KEY(GoalID) REFERENCES Goals(GOALID)
+);
+
+
+7.	 Create Work out details table
+
+CREATE TABLE Workout_details(
+	WorkOut_ID INT PRIMARY KEY NOT NULL,
+	Number_of_set INT,  
+	Number_of_Rep INT
+);
+8.	Create ProgressWorkout_jonc table
+
+CREATE TABLE ProgressWorkout_jonc(
+	ProgressWorkoutID INT PRIMARY KEY NOT NULL,
+	ProgressID INT NOT NULL,
+	WorkoutID INT NOT NULL,
+	FOREIGN KEY(WorkoutID) REFERENCES Workout_details(WorkOut_ID),
+	FOREIGN KEY(ProgressID) REFERENCES Progress(ProgressID)
+);
+
+9.	 Create Instructor address table
+
+CREATE TABLE Instructor_Adress(
+	Instruc_Address_ID INT PRIMARY KEY NOT NULL,
+	Instruct_Street VARCHAR(25),
+	Instruct_City VARCHAR(25)
+);
+
+10.	 Create Instructor table
+
+CREATE TABLE Instructor(
+	InstructorID INT PRIMARY KEY NOT NULL,
+	UserID INT NOT NULL,
+	Instruc_Address_ID INT NOT NULL,
+	Instructor_FName VARCHAR(40),
+	Instructor_SName VARCHAR(30), 
+	Instructor_Phone_Number VARCHAR(50),
+	Instructor_Specialization VARCHAR(40),
+	Instructor_aviability VARCHAR(30),
+	FOREIGN KEY(UserID) REFERENCES Users(UserID),
+	FOREIGN KEY(Instruc_Address_ID)REFERENCES Instructor_Adress(Instruc_Address_ID)
+);
+III.2. Values insertion in the created tables
+1.	Values insertion into users table
+
+INSERT INTO Users(UserID, User_Address_ID, UserFName, UserSName, UserStatus, UserGender, UserAge, UserWeight, UserHeight, UserMedicalStatus, UserPhoneNumber, UserEmail, EmergencyNumber) VALUES
+(1001, 129, 'Maximiliam', 'Ofori', 'More Active', 'M', 29, 70.41, 168.4, ' ', '024371818', 'oforimax@gmail.com', '055831'), 
+(1002, 134, 'Mensah', 'Sarbah', 'Inactive', 'M', 40, 80.34, 173.5, 'High Blood Pressure', '024128420', 'mensab@gmail.com', '054477'),
+(1004, 150, 'Nana', 'Akwaba', 'Medium Active', 'F', 33, 98.20, 163.41, 'Diabetic', '0239841', 'akwanana@gmail.com', '0474141'),
+(2002, 21, 'Asante', 'Sana', 'Less Active', 'F', 35, 93.21, 159.20, '', '05583731', 'asante@gmail.com', '022472194'),
+(2003, 25, 'Melisa', 'Awuni', 'More Active', 'F', 44, 70.21, 169.24, 'Heart Disease', '02421844', 'mel@gmail.com', '032832'),
+(1005, 371, 'Linda', 'Fatuma', 'Medium Active', 'F', 42, 58.31, 154.31, '', '0224731', 'lindfat@gmail.com', '0241414'),
+(1010, 80, 'Marvels', 'Boateng', 'More Active', 'M', 27, 65.2, 170.2, '', '0557371', 'mavboat@gmail.com', '0553291'),
+(1009, 90, 'Ngape', 'Rodriguez', 'More Active', 'M', 30, 68.4, 165.6, '','0539831', 'rodring@gmail.com', '055932001'),
+(2005, 38, 'Kwame', 'Nkurumah', 'Medium Active', 'M', 59, 77.3, 180.3, 'Diabetic', '0281418', 'kwam@gmail.com', '0552176'),
+(2010, 82, 'Ibrahim', 'Traoere', 'Less Active', 'M', 38, 83.21, 160.32, 'Heart Disease', '0241841', 'ibra29@gmail.com', '055371');
+
+
+2.	Values insertion into Exercise table
+INSERT INTO Exercise(ExerciseID, ExerciseType, CaloriesBurned, Muscles_Used, Exercise_Date, Exercise_Start_Time, Exercise_End_Time) VALUES
+(001,  'Running', 1800.41, 'Pulling Movement', '2025-01-01', '09:00:00', '11:00:00'),
+(002,  'Yoga', 1299.10, 'Chest', '2025-01-13', '10:00:00', '12:30:00'),
+(003, 'Physical Fitness', 2000.41, 'Glutes', '2025-02-03', '09:00:00', '11:00:00'), 
+(004, 'Yoga',  1499.00, 'Chest', '2025-06-03', '11:00:00', '19:30:00'),
+(005, 'Running', 3000.00, 'Pulling Movement', '2025-10-11', '10:00:00', '13:30:00'),
+(006,  'CardioExercice', 490.00, 'Quadriceps', '2025-10-11', '19:00:00', '22:00:00'),
+(007, 'Strength Training', 700.60, 'Biceps', '2025-12-12', '11:00:00', '13:30:00'),
+(008, 'Yoga', 2400.87, 'Chest', '2024-12-10', '11:00:00', '13:30:00'),
+(009, 'CardioExercice', 660, 'Quadriceps', '2025-10-11', '19:00:00', '22:00:00'),
+(010,  'Physical Fitness', 500.09, 'Pulling Movement', '2025-10-11', '18:00:00', '19:30:00');
+
+
+3.	Values insertion in UserAddress table
+
+INSERT INTO UserAdress(User_Adress_ID, User_Street, User_City)VALUES
+(129, 'Botoku', 'ACCRA'),
+(134, 'Koponglo', 'ACCRA'),
+(150, 'Bonu', 'ACCRA'),
+(21, 'Kanda', 'ACCRA'),
+(25, 'Kwesu', 'ACCRA'),
+(371, 'Tchimota', 'ACCRA'),
+(80, 'Obibini', 'ACCRA'),
+(90, 'Okleku', 'ACCRA'),
+(38, 'Kotoka', 'ACCRA'),
+(82, 'Mina', 'ACCRA');
+
+4.	Values insertion into User_Exercice_Joinction Table 
+
+INSERT INTO User_Exercise_Jonction(UserExerciseID,UserID, ExerciseID) VALUES 
+(10, 1001, 001),
+(20, 1001, 002),
+(30, 1002, 001),
+(40, 1004, 004),
+(50, 2002, 002),
+(60, 2003, 006),
+(70, 1005, 007),
+(80, 1010, 003),
+(90, 1009, 004),
+(100, 2005, 010);
+
+5.	Values insertion in Goals table
+
+INSERT INTO Goals(GoalID, UserID, GoalDescription, GoalStartDate, GoalExpireDate, GoalComplexityLevel, GoalTargetValue) VALUES
+(020, 1001, 'Fat lose', '2025-01-01', '2025-02-01', 'Basic', 0.5),
+(021, 1002, 'Fat lose', '2025-02-05', '2025-05-05', 'Pro', 1.5), 
+(022, 1004, 'Gain weight', '2025-01-01', '2025-07-05', 'Premium', 1),
+(023, 2002, 'Strength training', '2025-03-02', '2026-03-02', 'Premium', 1),
+(024, 2003, 'Weightlifting', '2025-02-01', '2025-03-01', 'Pro', '1.5' ),
+(025, 1005, 'Weightlifting', '2025-02-01', '2025-03-01', 'Pro', 1.5),
+(026, 1010, 'Fat lose', '2025-02-05', '2025-05-05', 'Pro', 1.5),
+(028, 1009, 'Fat lose', '2025-10-01', '2025-11-01', 'Basic', 0.5), 
+(029, 2005,  'Gain weight', '2025-03-01', '2025-10-05', 'Premium', 1),
+(030, 2010, 'Strength training', '2025-03-04', '2026-03-04', 'Premium', 1);
+
+6.	Values insertion into Nutrition table
+
+INSERT INTO Nutrition(Nutrition_ID, UserID,	Regime_Type, Number_Lunch, Ccaloriesconsumed_, ProteinsConsumed, Consumption_Date) VALUES
+(031, 1001, 'Vegetarian', 2, 3818.98, 9.545, '2025-01-01'),
+(032, 1002, 'Non Vegetarian', 4, 41741, 104.3525, '2025-03-01'),
+(033, 1004, 'Non Vegetarian', 3, 3043, 7.6075, '2025-01-01'),
+(034, 2002, 'Vegetarian', 2, 2199, 5.4975, '2025-03-02'),
+(035, 2003, 'Non Vegetarian', 2, 2110, 5.275, '2025-02-01'),
+(036, 1005,'Non Vegetarian', 2, 2110, 5.275, '2025-02-01'),
+(037, 1010, 'Vegetarian', 2, 2199, 5.4975, '2025-03-02'),
+(038, 1009, 'Non Vegetarian', 3, 3043, 7.6075, '2025-01-01'),
+(039, 2005, 'Vegetarian', 4, 41741, 104.3525, '2025-03-01'),
+(040, 2010, 'Vegetarian', 2, 2199, 5.4975, '2025-03-02');
+7.	Values insertion into work out details table
+
+INSERT INTO Workout_details(WorkOut_ID, Number_of_set, Number_of_Rep) VALUES 
+(11, 20, 2),
+(12,3, 30),
+(13, 5, 50),
+(14,6, 60),
+(15, 8, 80),
+(16, 7, 70), 
+(17,10, 100),
+(18, 10, 100),
+(19, 8, 80),
+(20, 15, 150);
+
+8.	Values insertion into progress table
+INSERT INTO Progress(ProgressID, UserID, GoalID, Weight_lost, Week_frequency) VALUES 
+(01, 1001, 020,3,2),
+(02, 1002, 021,9,7),
+(03, 1004, 022,2,3), 
+(04, 2002, 023,2,5),
+(05, 2003, 024,7,2),
+(06, 1005, 025,3,2),
+(07, 1010, 026,5,2),
+(08, 1009, 028, 2,3),
+(09, 2005, 029, 2,2),
+(10, 2010, 030, 2,4);
+
+9.	Values insertion into progress workout junction 
+INSERT INTO ProgressWorkout_jonc(ProgressWorkoutID, ProgressID, WorkoutID) VALUES
+(1, 01, 11),
+(2, 02, 12),
+(3, 03, 13),
+(4, 04, 12),
+(5, 05, 15),
+(6, 06, 16),
+(7, 07, 16),
+(8, 08, 18),
+(9, 09, 19),
+(10, 10, 20);
+
+10.	Values insertion into Instructor address table
+
+INSERT INTO Instructor_Adress(Instruc_Address_ID, Instruct_Street, Instruct_City) VALUES 
+(51, 'Koponglo', 'Accra'),
+(52, 'Kanda', 'Accra'),
+(39, 'Brenya', 'Accra'),
+(33, 'Padmore', 'Accra'),
+(30, 'Osabu', 'Accra'), 
+(40, 'Bartholomew', 'Accra'), 
+(35, 'Mango', 'Accra'), 
+(29, 'Meridian', 'Accra'),
+(38, 'Kraku', 'Accra'), 
+(49, 'Kwesu', 'Accra');
+
+
+11.	Values insertion into instructor table
+
+INSERT INTO Instructor (InstructorID, UserID, Instructor_FName, Instructor_SName, Instructor_Phone_Number, Instructor_Specialization, Instructor_aviability, Instruc_Address_ID) VALUES
+(01, 1001, 'John', 'Ntobi', '0294181', 'Personnal Trainer', 'Morning', 51),
+(02, 1002, 'Theophilus', 'Selya', '0217741', 'Nutrionist', 'Afternoon', 52), 
+(03, 1004, 'Johanes', 'Boateng', '023714', 'Nutrionist', 'Afternoon', 39),
+(04, 2002, 'Yves', 'Imani', '0741310', 'Personnal Trainer', 'Morning', 33),
+(05, 2003, 'Priscilla', 'Justice', '02414814', 'Personnal Trainer', 'Morning', 30),
+(06, 1005, 'Linda', 'Helene', '023471', 'Nutrionist', 'Afternoon', 40),
+(07, 1010, 'Mary', 'Appiah', '02448143', 'Nutrionist', 'Afternoon', 35),
+(08, 1009, 'David', 'Sahab', '0248417', 'Nutrionist', 'Afternoon', 29),
+(09, 2005, 'Samuel', 'Amtol', '05593100', 'Personnal Trainer', 'Morning', 38),
+(10, 2010, 'Emmanuel', 'Kingslay', '073192', 'Personnal Trainer', 'Morning', 49);
+
+II. System functionality demonstration 
+
+--------------------------------------------------------------------------------------
+-----        PERFORM SOME QUERIES ON Exercise Table
+--------------------------------------------------------------------------------------
+----Select all records in Exercise Table
+
+SELECT * FROM [dbo].[Exercise];
+
+
+----Select user who burned more than 2000 Kcal
+SELECT* FROM [dbo].[Exercise]
+WHERE CaloriesBurned>2000;
+ 
+---- Select Exercice Duration and exercice type from Exercice table
+SELECT Exercise_Date, ExerciseType FROM [dbo].[Exercise];
+
+---- Select users who did CardioExercice and start their training on 2025-10-11, and  with calory burned greater than 200 and used to train chest 
+SELECT*  FROM  [dbo].[Exercise] WHERE  (ExerciseType='CardioExercice' and Exercise_Start_Time='2025-10-11') AND (CaloriesBurned>200 AND Muscles_Used= 'Chest');
+
+ ---- Count the number of users who did Yoga and with a duration activity equals to 1, and  with calory burned greater than 1200 and used to train Biceps
+SELECT COUNT (*)
+FROM [dbo].[Exercise] WHERE  (ExerciseType='Yoga' and Exercise_Start_Time='13:30:00') AND (CaloriesBurned>1200 AND Muscles_Used= 'Biceps');
+
+ ---- Select users who did Yoga or running as exercises
+SELECT* FROM [dbo].[Exercise] WHERE ExerciseType in ('Yoga', 'Running');
+
+--- Sort the exercise table in descending order by Exercise Date
+SELECT* FROM [dbo].[Exercise] order by Exercise_Date DESC
+
+
+-- Filter the exercice table by Exercice Start time in an ascending order and Muscles_Used in alphabetic order
+SELECT* FROM [dbo].[Exercise] ORDER BY Exercise_Start_Time ASC, Muscles_Used ASC
+
+--- Select the 5 first rows of our tables
+SELECT TOP 5* FROM [dbo].[Exercise]
+
+--- Select people who did start_exercice between 11:00  and 19:00 
+SELECT* FROM [dbo].[Exercise] WHERE Exercise_Start_Time BETWEEN '11:00:00' AND '19:00:00';
+
+--- Compute the average of calory burned per hour for user who did exercise between 11:00  and 19:00 
+
+SELECT 
+    UsEx.UserID, 
+    AVG(Ex.CaloriesBurned) AS AvgCaloriesBurned
+FROM 
+    Exercise Ex
+JOIN 
+    User_Exercise_Jonction UsEx ON Ex.ExerciseID = UsEx.ExerciseID
+WHERE 
+    Ex.Exercise_Start_Time BETWEEN '11:00:00' AND '19:00:00'
+GROUP BY 
+    UsEx.UserID;
+
+----- Count the number of exercises performed by each user
+
+SELECT 
+    Us.UserID,
+    Us.UserFName,
+    Us.UserSName,
+    COUNT(DISTINCT User_Exercise_Jonction.ExerciseID) AS NbrExercisePerformed
+FROM Users Us
+JOIN User_Exercise_Jonction ON Us.UserID = User_Exercise_Jonction.UserID
+GROUP BY Us.UserID, Us.UserFName, Us.UserSName;
+
+--- select the name of the user who performed multiples exercises
+
+SELECT U.UserID, U.UserFName, U.UserSName, COUNT(User_Exercise_Jonction.ExerciseID) AS ExerciseCount
+FROM Users AS U
+JOIN User_Exercise_Jonction ON U.UserID = User_Exercise_Jonction.UserID
+GROUP BY U.UserID, U.UserFName, U.UserSName
+HAVING COUNT(User_Exercise_Jonction.ExerciseID) > 1;
+
+
+-----------------------------------------------------------
+-----        PERFORM SOME QUERIES ON Goals Table
+--------------------------------------------------------------------------------------
+---Select all records
+SELECT* FROM [dbo].[Goals]
+
+
+--- Select a goal for a specific user
+
+SELECT* FROM [dbo].[Goals] WHERE UserID='1004'
+
+
+--- SELECT Users for whom their goals will expire before '2025-11-01'
+
+SELECT * FROM [dbo].[Goals] WHERE GoalExpireDate<'2025-11-01'
+
+
+--- Select Users with a goal description is Fat lose and with professional level of complexity
+SELECT* FROM [dbo].[Goals] WHERE GoalDescription='Fat lose' AND GoalComplexityLevel='Pro';
+
+---- Count the number of users with goal target value equals to 1.5 and goal description is to gain weight
+
+SELECT COUNT(*) FROM [dbo].[Goals] WHERE GoalComplexityLevel='0.5' AND GoalDescription='Gain Weight';
+
+--- Select the top 5 rows of Goals table
+SELECT TOP 5* FROM [dbo].[Goals]
+
+----Select users with goal ID ending with 3
+SELECT GoalID FROM [dbo].[Goals] WHERE GoalID LIKE '%3'
+
+-- Count users with a goal ID ending with '4'
+SELECT COUNT(DISTINCT u.UserID) AS UserCount
+FROM [dbo].[Users] u
+JOIN [dbo].[Goals] g ON u.UserID = g.UserID
+WHERE g.GoalID LIKE '%4'
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------
+--PERFOM QUERIES ON USERS TABLE
+--------------------------------------------------------------------------------------
+---Select all users
+SELECT * FROM Users
+
+---Select users which have an inactive status
+SELECT *FROM Users Where UserStatus='Inactive'
+
+---Count the number of users
+SELECT COUNT(*) FROM Users
+
+----Select users older than 40
+SELECT* FROM Users WHERE UserAge>40
+
+--- Compute the mean age
+SELECT AVG(UserAge) From Users
+
+--- Compute the mean weight
+SELECT AVG(UserWeight) from Users
+
+--- Compute the mean Height
+SELECT AVG(UserHeight) from Users
+
+-----Compute the BMI
+SELECT UserID, 
+       UserWeight / (UserHeight / 100.0 * UserHeight / 100.0) AS BMI
+FROM Users;
+
+----Select Users with a BMI greater than 30 (susceptible to obesity)
+
+SELECT UserID, 
+       UserWeight / (UserHeight / 100.0 * UserHeight / 100.0) AS BMI
+FROM Users
+WHERE UserWeight / (UserHeight / 100.0 * UserHeight / 100.0) > 30;
+---- Count users with a BMI is greater than 30
+SELECT COUNT(*)
+FROM Users
+WHERE UserID IN (
+    SELECT UserID
+    FROM Users
+    WHERE UserWeight / (UserHeight / 100.0 * UserHeight / 100.0) > 30
+); 
+
+--------------------------------------------------------------------------------------
+-----        PERFORM SOME QUERIES ON Nutrition Table
+--------------------------------------------------------------------------------------
+---Select Nutrition Table
+SELECT* FROM [dbo].[Nutrition]
+
+-- Count the number of users who are vegetarian 
+
+SELECT COUNT (*) FROM Nutrition WHERE Regime_Type='Vegetarian'
+
+---- Users who consumed food containing more than 300 and eating more than 3 a day
+SELECT* FROM Nutrition WHERE Caloriesconsumed_>300 AND Number_Lunch='2' 
+
+--- Select Users who consumed proteins is greater than the mean 
+SELECT* FROM Nutrition WHERE Proteinsconsumed> (SELECT AVG(ProteinsConsumed) FROM Nutrition);
+
+---- Compute the total calories consumed by users in a specific date
+SELECT SUM(Caloriesconsumed_) FROM Nutrition WHERE Consumption_Date='2025-01-01'
+
+
+----Update the feeding type for a specific nutrition record
+UPDATE Nutrition SET Regime_Type='Vegetarian' WHERE Nutrition_ID='35'
+
+
+--------------------------------------------------------------------------------------
+-----        PERFORM SOME QUERIES ON Progress Table
+--------------------------------------------------------------------------------------
+---- Select all records
+SELECT * FROM Progress
+
+--- Select User with a high week frequency
+SELECT* FROM Progress WHERE Week_frequency>4
+
+---- Update the week frequency, from 5 to 6 for the user with ID=4
+UPDATE Progress SET Week_frequency=7 WHERE UserID=4
+
+---- Count the number of users who lost more than 5 kilos per months
+SELECT COUNT(*) FROM Progress WHERE Weight_losed>5
+
+----  Compute the average weight lost for all users
+SELECT AVG(Weight_lost) AS AvgWeightLost FROM Progress;
+
+--------------------------------------------------------------------------------------
+-----        PERFORM SOME QUERIES ON Instruction Table
+--------------------------------------------------------------------------------------
+---- Select all records
+SELECT * FROM Instructor
+--- Select users with have John Kingslay as their instructor
+SELECT* FROM Instructor WHERE (Instructor_FName='John' AND Instructor_SName='Ntobi')
+---- Select Users who did their training in the afternoon
+SELECT * FROM Instructor WHERE Instructor_aviability='Afternoon'
+
+
+---Select Instructor who are specialist in nutrition
+
+SELECT* FROM Instructor WHERE Instructor_Specialization='Nutrionist'
+
+--------------------------------------------------------------------------------------
+-----        PERFORM SOME QUERIES ON Work out details Table
+--------------------------------------------------------------------------------------
+---- Select all records
+SELECT * FROM Workout_Details
+
+--- Compute the mean of number of repetitions
+SELECT AVG(Number_of_Rep) FROM  Workout_Details
+
+--- Update the number of rep for the WorkOut_ID='16'
+UPDATE Workout_Details SET Number_of_Rep=75 WHERE WorkOut_ID='16'
+
+---- Select recors of people who have a number of set greater than the average
+SELECT* FROM Workout_Details WHERE Number_set>(SELECT AVG(Number_set) FROM Workout_Details)
+
+--------------------------------------------------------------------------------------
+-----        PERFORM SOME ADVANCED QUERIES JOINGING DIFFERENTS TABLES 
+--------------------------------------------------------------------------------------
+---- Find Users with Specific Goals and Their Instructors
+SELECT u.UserFName, u.UserSName, g.GoalDescription, i.Instructor_FName, i.Instructor_SName
+FROM Users u
+JOIN Goals g ON u.UserID = g.UserID
+JOIN Instructor i ON u.UserID = i.UserID
+WHERE g.GoalDescription = 'Fat lose';
+
+----Compute the total Calories Burned by Users with a certain Medical Conditions
+
+SELECT u.UserMedicalStatus, SUM(e.CaloriesBurned) AS TotalCaloriesBurned
+FROM Users u
+JOIN Exercise e ON u.UserID = e.UserID
+WHERE u.UserMedicalStatus IN ('Diabetic', 'Heart Disease')
+GROUP BY u.UserMedicalStatus;
+---- Average Calories Consumed by Users in Different Regimes
+SELECT n.Regime_Type, AVG(n.Ccaloriesconsumed_) AS AverageCaloriesConsumed
+FROM Nutrition n
+GROUP BY n.Regime_Type;
+
+-----List Users and Their Progress in Different Workouts
+
+SELECT u.UserFName, u.UserSName, p.Weight_losed, w.Number_set, w.Number_Rep
+FROM Users u
+JOIN Progress p ON u.UserID = p.UserID
+JOIN Workout_Details w ON p.WorkoutID = w.WorkOut_ID;
+
+----Find Users with the Most Calories Burned
+SELECT TOP 3 u.UserFName, u.UserSName, SUM(e.CaloriesBurned) AS TotalCaloriesBurned
+FROM Users u
+JOIN Exercise e ON u.UserID = e.UserID
+GROUP BY u.UserFName, u.UserSName
+ORDER BY TotalCaloriesBurned DESC;
+
+---- Group users according to their instructor
+SELECT i.Instructor_FName, i.Instructor_SName, u.UserFName, u.UserSName
+FROM Instructor i
+JOIN Users u ON i.UserID = u.UserID
+ORDER BY i.Instructor_FName, i.Instructor_SName;
+
+---Users who met their goals
+SELECT u.UserFName, u.UserSName, g.GoalDescription, g.GoalTargetValue, p.Weight_losed
+FROM Users u
+JOIN Progress p ON u.UserID = p.UserID
+JOIN Goals g ON p.GoalID = g.GoalID
+WHERE p.Weight_losed >= g.GoalTargetValue;
+----Identify the most common exercise
+SELECT TOP 2 e.ExerciseType, COUNT(*) AS ExerciseCount
+FROM Exercise e
+GROUP BY e.ExerciseType
+ORDER BY ExerciseCount DESC;
+
+--- Calculate the calories burned by each gender for a specific exercice type
+
+SELECT u.UserGender, e.ExerciseType, SUM(e.CaloriesBurned) AS TotalCaloriesBurned
+FROM Users u
+JOIN Exercise e ON u.UserID = e.UserID
+WHERE e.ExerciseType = 'Yoga'
+GROUP BY u.UserGender, e.ExerciseType;
+
+---Compute or filter users and their nutrition according to their medical status
+SELECT user.UserFName, user.UserSName, user.UserMedicalStatus, nut.Regime_Type, nut.Caloriesconsumed_
+FROM Users user
+JOIN Nutrition nut ON user.UserID = nut.UserID
+WHERE user.UserMedicalStatus IN ('Diabetic', 'Heart Disease');
+
+---Users with a top workout frequency
+SELECT TOP 2 usr.UserFName, usr.UserSName, MAX(prog.Week_frequency) AS HighestWeeklyFrequency
+FROM Users usr
+JOIN Progress prog ON usr.UserID = prog.UserID
+GROUP BY usr.UserFName, usr.UserSName
+ORDER BY HighestWeeklyFrequency DESC;
+
+---Users with most calories consumed on a specific date
+SELECT TOP 3 u.UserFName, u.UserSName, SUM(n.Caloriesconsumed_) AS TotalCaloriesConsumed
+FROM Users u
+JOIN Nutrition n ON u.UserID = n.UserID
+WHERE n.Consumption_Date = '2025-03-01'
+GROUP BY u.UserFName, u.UserSName
+ORDER BY TotalCaloriesConsumed DESC;
+
+
+--- Find the exercise performed by each user last moth 
+SELECT 
+    U.UserID,
+    U.UserFName,
+    U.UserSName,
+    Exercise.ExerciseType,
+    Exercise.Exercise_Date
+FROM Users AS U
+JOIN User_Exercise_Jonction ON U.UserID = User_Exercise_Jonction.UserID
+JOIN Exercise ON User_Exercise_Jonction.ExerciseID = Exercise.ExerciseID
+WHERE Exercise.Exercise_Date >= DATEADD(MONTH, -1, GETDATE());
+
+---- Find users, their trainers names and their area of specialisation
+SELECT 
+    U.UserID,
+    U.UserFName,
+    U.UserSName,
+    Ins.Instructor_FName,
+    Ins.Instructor_Specialization
+FROM Users U
+JOIN Instructor Ins ON U.UserID = Ins.UserID;
+
+--------Identify the top 2 most popular exercise 
+SELECT TOP 2
+    Exer.ExerciseType,
+    COUNT(User_Exercise_Jonction.ExerciseID) AS Frequency 
+FROM User_Exercise_Jonction
+JOIN Exercise Exer ON User_Exercise_Jonction.ExerciseID = Exer.ExerciseID
+GROUP BY Exer.ExerciseType
+ORDER BY Frequency DESC;
+
+---- Users with their progress and workout information 
+SELECT 
+    Users.UserID,
+    Users.UserFName,
+    Users.UserSName,
+    Workout_details.WorkOut_ID,
+    Workout_details.Number_of_Set,
+    Workout_details.Number_of_Rep,
+    Progress.Weight_Lost
+FROM Users
+JOIN Progress ON Users.UserID = Progress.UserID
+JOIN ProgressWorkout_jonc ON Progress.ProgressID = ProgressWorkout_jonc.ProgressID
+JOIN Workout_details ON ProgressWorkout_jonc.WorkoutID = Workout_details.WorkOut_ID;
+
