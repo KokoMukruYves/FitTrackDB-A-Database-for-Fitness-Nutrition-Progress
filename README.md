@@ -277,6 +277,8 @@ Finally, the system needs to be updated regularly the system to avoid obsolescen
 
 **© 2026 Koko Mukuru Yves**. All rights reserved.
 
+For questions or collaborations, feel free to reach out!
+
 Email: kmukuru_yves@st.ug.edu.gh 
 
 LinkedIn: https://www.linkedin.com/in/koko-mukuru-yves-98621a14a
