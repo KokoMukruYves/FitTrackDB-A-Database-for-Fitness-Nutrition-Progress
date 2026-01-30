@@ -272,10 +272,17 @@ Finally, the system needs to be updated regularly the system to avoid obsolescen
 </details>
 
 ---
+
+![20250310_170704](https://github.com/user-attachments/assets/f150b11a-d73f-43de-af9e-d6ab7f989808)
+
+
 ## 📬 Contact
 **Koko Mukuru Yves**  
+
 Email: kmukuru_yves@st.ug.edu.gh 
+
 LinkedIn: [https://www.linkedin.com/in/koko-mukuru-yves-98621a14a]
+
 
 
 
