@@ -1,5 +1,6 @@
 # Fitness Track Database
-<img width="1024" height="1024" alt="A modern logo design" src="https://github.com/user-attachments/assets/d5baa830-8ed8-478d-94ac-42ee22a63554" />
+
+<img width="766" height="283" alt="image" src="https://github.com/user-attachments/assets/953face4-9757-4b3b-bf6b-2f7e7983f0cc" />
 
 <details>
 <summary id="Systement- Documentation"> I.	System documentation</summary>
