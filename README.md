@@ -1,7 +1,7 @@
 # Fitness Track Database
 
 <details>
-<summary id="Systement- Documentation"> ## I.	System documentation</summary>
+<summary id="Systement- Documentation"> I.	System documentation</summary>
 
 
 ### 1.	Executive summary 
@@ -58,8 +58,8 @@ The key entities are : Users, Goals, Progress, Nutrition, Instructor, and Exerci
 
 ---
 
-
-## II. Normalization Documentation
+<details>
+<summary id="Normalization - Documentation"> II. Normalization Documentation</summary>
 
 #### A. First Normal Form 
 
@@ -85,7 +85,13 @@ The tables are already in the 3NF and there is no multi-valued dependency (any n
 <img width="722" height="337" alt="image" src="https://github.com/user-attachments/assets/0b5984cc-0cb2-4e57-ab6b-f8db6a21660a" />
 
 
-## III.	System implementation using SQL Server Management Studio
+</details>
+
+---
+
+<details>
+<summary id="System-implementation-using-SQL-Server-Management-Studio"> III. System implementation using SQL Server Management Studio</summary>
+
 ### •	Create the Database
  <img width="477" height="526" alt="image" src="https://github.com/user-attachments/assets/397b7dd8-23c0-4a93-be25-4e1d9414d33c" />
 
@@ -163,7 +169,12 @@ The tables are already in the 3NF and there is no multi-valued dependency (any n
 
 <img width="945" height="269" alt="image" src="https://github.com/user-attachments/assets/ba0038a9-3496-4a71-b7d6-d8753760c693" />
 
-## III.3. System functionality demonstration 
+</details>
+
+---
+
+<details>
+<summary id="System-functionality-demonstaration"> III. System functionality demonstration </summary>
 
 ### 1. Select all records in Exercise Table
 
@@ -243,7 +254,12 @@ The tables are already in the 3NF and there is no multi-valued dependency (any n
 ### 23. Find the exercise performed by each user last moth 
 <img width="625" height="384" alt="image" src="https://github.com/user-attachments/assets/1914ac2d-cb3c-4eec-9d5b-5c879eff7037" />
 
-## DB Weakness and future perspectives
+</details>
+
+---
+
+<details>
+<summary id="DB-Weakness-and-future-perspectives"> IV. DB Weakness and future perspectives</summary>
 
 In terms of futures improvements, an online system could be the best because it offers users the possibilities to follow this progress everywhere on the globe. And facilitate the communication between users and staff.
 
@@ -251,7 +267,9 @@ Also, this design meets his main goal but there are some aspects of the gym that
 
 Finally, the system needs to be updated regularly the system to avoid obsolescence. And to be evaluate/tested in a really world to ensure that it satisfied the business requirement.
 
+</details>
 
+---
 
 
 
