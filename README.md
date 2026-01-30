@@ -1,6 +1,8 @@
 # Fitness Track Database
 
-## I.	System documentation
+<details>
+<summary id="Systement- Documentation"> ## I.	System documentation</summary>
+
 
 ### 1.	Executive summary 
 
@@ -50,6 +52,12 @@ The key entities are : Users, Goals, Progress, Nutrition, Instructor, and Exerci
 ### 6.	Entity relationship and business rules
 
 <img width="575" height="622" alt="image" src="https://github.com/user-attachments/assets/113739c9-d51e-45d5-b3f0-1cb5bc013b06" />
+
+
+</details>
+
+---
+
 
 ## II. Normalization Documentation
 
