@@ -9,7 +9,6 @@ CREATE TABLE UserAddress(
 	User_City VARCHAR(25)
 );
 
-
 2.	Create users table
 
 CREATE TABLE Users(
@@ -65,7 +64,6 @@ CREATE TABLE Nutrition (
 );
 
 6.	Create Progress table
-
 	
 CREATE TABLE Progress (
 	ProgressID INT PRIMARY KEY NOT NULL,
@@ -77,7 +75,6 @@ CREATE TABLE Progress (
 	FOREIGN KEY(GoalID) REFERENCES Goals(GOALID)
 );
 
-
 7.	 Create Work out details table
 
 CREATE TABLE Workout_details(
@@ -85,6 +82,7 @@ CREATE TABLE Workout_details(
 	Number_of_set INT,  
 	Number_of_Rep INT
 );
+
 8.	Create ProgressWorkout_jonc table
 
 CREATE TABLE ProgressWorkout_jonc(
@@ -117,7 +115,9 @@ CREATE TABLE Instructor(
 	FOREIGN KEY(UserID) REFERENCES Users(UserID),
 	FOREIGN KEY(Instruc_Address_ID)REFERENCES Instructor_Adress(Instruc_Address_ID)
 );
+
 III.2. Values insertion in the created tables
+
 1.	Values insertion into users table
 
 INSERT INTO Users(UserID, User_Address_ID, UserFName, UserSName, UserStatus, UserGender, UserAge, UserWeight, UserHeight, UserMedicalStatus, UserPhoneNumber, UserEmail, EmergencyNumber) VALUES
@@ -134,6 +134,7 @@ INSERT INTO Users(UserID, User_Address_ID, UserFName, UserSName, UserStatus, Use
 
 
 2.	Values insertion into Exercise table
+
 INSERT INTO Exercise(ExerciseID, ExerciseType, CaloriesBurned, Muscles_Used, Exercise_Date, Exercise_Start_Time, Exercise_End_Time) VALUES
 (001,  'Running', 1800.41, 'Pulling Movement', '2025-01-01', '09:00:00', '11:00:00'),
 (002,  'Yoga', 1299.10, 'Chest', '2025-01-13', '10:00:00', '12:30:00'),
@@ -202,6 +203,7 @@ INSERT INTO Nutrition(Nutrition_ID, UserID,	Regime_Type, Number_Lunch, Ccalories
 (038, 1009, 'Non Vegetarian', 3, 3043, 7.6075, '2025-01-01'),
 (039, 2005, 'Vegetarian', 4, 41741, 104.3525, '2025-03-01'),
 (040, 2010, 'Vegetarian', 2, 2199, 5.4975, '2025-03-02');
+
 7.	Values insertion into work out details table
 
 INSERT INTO Workout_details(WorkOut_ID, Number_of_set, Number_of_Rep) VALUES 
@@ -217,6 +219,7 @@ INSERT INTO Workout_details(WorkOut_ID, Number_of_set, Number_of_Rep) VALUES
 (20, 15, 150);
 
 8.	Values insertion into progress table
+
 INSERT INTO Progress(ProgressID, UserID, GoalID, Weight_lost, Week_frequency) VALUES 
 (01, 1001, 020,3,2),
 (02, 1002, 021,9,7),
@@ -230,6 +233,7 @@ INSERT INTO Progress(ProgressID, UserID, GoalID, Weight_lost, Week_frequency) VA
 (10, 2010, 030, 2,4);
 
 9.	Values insertion into progress workout junction 
+
 INSERT INTO ProgressWorkout_jonc(ProgressWorkoutID, ProgressID, WorkoutID) VALUES
 (1, 01, 11),
 (2, 02, 12),
@@ -276,7 +280,7 @@ II. System functionality demonstration
 --------------------------------------------------------------------------------------
 -----        PERFORM SOME QUERIES ON Exercise Table
 --------------------------------------------------------------------------------------
-----Select all records in Exercise Table
+---- Select all records in Exercise Table
 
 SELECT * FROM [dbo].[Exercise];
 
@@ -299,11 +303,10 @@ FROM [dbo].[Exercise] WHERE  (ExerciseType='Yoga' and Exercise_Start_Time='13:30
 SELECT* FROM [dbo].[Exercise] WHERE ExerciseType in ('Yoga', 'Running');
 
 --- Sort the exercise table in descending order by Exercise Date
-SELECT* FROM [dbo].[Exercise] order by Exercise_Date DESC
-
+SELECT* FROM [dbo].[Exercise] order by Exercise_Date DESC;
 
 -- Filter the exercice table by Exercice Start time in an ascending order and Muscles_Used in alphabetic order
-SELECT* FROM [dbo].[Exercise] ORDER BY Exercise_Start_Time ASC, Muscles_Used ASC
+SELECT* FROM [dbo].[Exercise] ORDER BY Exercise_Start_Time ASC, Muscles_Used ASC,
 
 --- Select the 5 first rows of our tables
 SELECT TOP 5* FROM [dbo].[Exercise]
@@ -635,4 +638,5 @@ FROM Users
 JOIN Progress ON Users.UserID = Progress.UserID
 JOIN ProgressWorkout_jonc ON Progress.ProgressID = ProgressWorkout_jonc.ProgressID
 JOIN Workout_details ON ProgressWorkout_jonc.WorkoutID = Workout_details.WorkOut_ID;
+
 
