@@ -272,9 +272,10 @@ Finally, the system needs to be updated regularly the system to avoid obsolescen
 </details>
 
 ---
-
-
-
+## 📬 Contact
+**Koko Mukuru Yves**  
+Email: kmukuru_yves@st.ug.edu.gh 
+LinkedIn: [https://www.linkedin.com/in/koko-mukuru-yves-98621a14a]
 
 
 
