@@ -283,7 +283,7 @@ For questions or collaborations, feel free to reach out!
 
 ---
 <p align="center">
-  <i>"Turning data into actionable intelligence, one project at a time."</i>
+  <i>"Turning data into actionable insights, one project at a time."</i>
 </p>
 
 **© 2026 Koko Mukuru Yves**. All rights reserved
