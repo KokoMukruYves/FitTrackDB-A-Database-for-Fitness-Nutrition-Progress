@@ -221,6 +221,7 @@ The tables are already in the 3NF and there is no multi-valued dependency (any n
 ### 13. Update the feeding type for a specific nutrition record
 #### Before
 <img width="945" height="60" alt="image" src="https://github.com/user-attachments/assets/8ea04a9c-f263-484c-ac39-fd5d90aa3de5" />
+
 #### After updating
 <img width="945" height="51" alt="image" src="https://github.com/user-attachments/assets/68bf0ae8-4d5f-4e0d-b3df-a30a3ea3db77" />
 
